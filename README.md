@@ -27,7 +27,7 @@ Requirements:
 Run:
 
 ```
-build.bat
+build.bat -r # -r is reconfigure the cmake, which is needed on first build
 ```
 
 This script:
