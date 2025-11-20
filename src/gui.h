@@ -23,7 +23,7 @@ class Gui {
     GLFWwindow* m_window = nullptr;
     VGMLogger m_logger;
 
-    std::vector<std::string> m_MusicalInstruments;
+    std::vector<std::string> m_musicalInstruments;
     int m_currentInstrumentIndex = -1;
 
     std::unordered_map<std::string, bool> m_WindowStates = {

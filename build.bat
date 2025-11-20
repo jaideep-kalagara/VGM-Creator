@@ -1,6 +1,9 @@
 @echo off
 setlocal enabledelayedexpansion
 
+set RUN_CONFIG=0
+if "%1"=="-r" set RUN_CONFIG=1
+
 echo Checking Python installation...
 
 where python >nul 2>&1
@@ -51,9 +54,12 @@ cd build
 set LOGFILE=build_log.txt
 del %LOGFILE% >nul 2>&1
 
-echo Running CMake configure...
-cmake .. > %LOGFILE% 2>&1
-if errorlevel 1 goto :showError
+
+if %RUN_CONFIG%==1 (
+    echo Running CMake configure...
+    cmake .. > %LOGFILE% 2>&1
+    if errorlevel 1 goto :showError
+)
 
 echo Running build...
 cmake --build . >> %LOGFILE% 2>&1
