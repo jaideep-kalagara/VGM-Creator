@@ -19,7 +19,7 @@ This project focuses on being easy to use for people with little or no DAW exper
 Requirements:
 
 - Visual Studio 2022 or newer
-- CMake 3.20+
+- CMake 3.6+
 - Git
 
 ### Quick Build (recommended)
