@@ -73,10 +73,10 @@ void Gui::update() {
     ImGui::SetNextWindowSize(ImVec2(0, 0), ImGuiCond_Always);
     if (m_WindowStates["Credits"]) {
         if (ImGui::Begin("Credits", &m_WindowStates["Credits"], ImGuiWindowFlags_NoResize)) {
-            ImGui::Text("Developed by Jaideep Kalagara");
+            ImGui::Text("Developed by Jaideep Kalagara :>");
             ImGui::Separator();
             ImGui::Text("Using Dear ImGui, GLFW, GLAD, NFD,");
-            ImGui::Text("minizip-ng, nlohmann_json, and miniaudio.");
+            ImGui::Text("miniz, nlohmann_json, and miniaudio.");
         }
         ImGui::End();
     }
