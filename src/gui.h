@@ -1,12 +1,13 @@
 #pragma once
 
-#include <GLAD/gl.h>
+#define GLFW_INCLUDE_NONE
+
 #include <GLFW/glfw3.h>
+#include <glad/gl.h>
 
 #include <memory>
 #include <string>
 #include <unordered_map>
-#include <vector>
 
 #include "editor.h"
 #include "imgui.h"
@@ -28,7 +29,6 @@ class Gui {
         {"Editor", false},
     };
 
-    // create editors
     std::unique_ptr<Editor> m_editor;
 
     GLFWwindow* m_window = nullptr;

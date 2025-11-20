@@ -1,12 +1,11 @@
-// gui.cpp
 #include "gui.h"
+
+#define GLFW_INCLUDE_NONE
 
 #include <GLFW/glfw3.h>
 #include <glad/gl.h>
 
 #include <memory>
-#include <nfd.hpp>
-#include <vector>
 
 #include "app.h"
 #include "imgui_style.h"
@@ -34,14 +33,13 @@ Gui::Gui(GLFWwindow* window, VGMLogger logger)
     ImGui_ImplOpenGL3_Init("#version 460");
 
     m_editor = std::make_unique<Editor>(m_window, m_logger);
-};
+}
 
 void Gui::update() {
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 
-    // create menu bar
     if (ImGui::BeginMainMenuBar()) {
         if (ImGui::BeginMenu("File")) {
             if (ImGui::MenuItem("Exit")) {
@@ -52,18 +50,17 @@ void Gui::update() {
 
         if (ImGui::BeginMenu("Window")) {
             for (auto& window : m_WindowStates) {
-                if (ImGui::MenuItem(window.first.c_str())) {
+                if (ImGui::MenuItem(window.first.c_str(), nullptr, window.second)) {
                     window.second = !window.second;
                 }
             }
             ImGui::EndMenu();
         }
+
+        ImGui::EndMainMenuBar();
     }
-    ImGui::EndMainMenuBar();
 
-    // Main window
     ImGui::SetNextWindowSize(ImVec2(0, 0), ImGuiCond_Always);
-
     if (m_WindowStates["Main Info"]) {
         if (ImGui::Begin("VGM Creator", &m_WindowStates["Main Info"], ImGuiWindowFlags_NoResize)) {
             ImGui::Text("Welcome to VGM Creator!");
@@ -76,7 +73,7 @@ void Gui::update() {
     ImGui::SetNextWindowSize(ImVec2(0, 0), ImGuiCond_Always);
     if (m_WindowStates["Credits"]) {
         if (ImGui::Begin("Credits", &m_WindowStates["Credits"], ImGuiWindowFlags_NoResize)) {
-            ImGui::Text("Developed by Jaideep Kalagara :>");
+            ImGui::Text("Developed by Jaideep Kalagara");
             ImGui::Separator();
             ImGui::Text("Using Dear ImGui, GLFW, GLAD, NFD,");
             ImGui::Text("minizip-ng, nlohmann_json, and miniaudio.");

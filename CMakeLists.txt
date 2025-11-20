@@ -22,13 +22,13 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(imgui)
 
-# minizip-ng
+# ZipLib
 FetchContent_Declare(
-    minizip
-    GIT_REPOSITORY https://github.com/zlib-ng/minizip-ng.git
-    GIT_TAG develop
+    miniz
+    GIT_REPOSITORY https://github.com/richgel999/miniz.git
+    GIT_TAG master
 )
-FetchContent_MakeAvailable(minizip)
+FetchContent_MakeAvailable(miniz)
 
 # GLAD
 FetchContent_Declare(
@@ -98,7 +98,7 @@ target_link_libraries(VGMCreator PRIVATE
     glfw
     imgui_lib
     glad_gl_core_46
-    minizip
+    miniz
     miniaudio
     nfd
     nlohmann_json
