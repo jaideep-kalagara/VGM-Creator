@@ -3,10 +3,12 @@
 #include <GLAD/gl.h>
 #include <GLFW/glfw3.h>
 
+#include <memory>
 #include <string>
 #include <unordered_map>
 #include <vector>
 
+#include "editor.h"
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
@@ -20,17 +22,15 @@ class Gui {
     void update();
 
    private:
-    GLFWwindow* m_window = nullptr;
-    VGMLogger m_logger;
-
-    std::vector<std::string> m_musicalInstruments;
-    int m_currentInstrumentIndex = -1;
-
     std::unordered_map<std::string, bool> m_WindowStates = {
         {"Main Info", true},
         {"Credits", false},
         {"Editor", false},
     };
 
-    void addMusicalInstrument();
+    // create editors
+    std::unique_ptr<Editor> m_editor;
+
+    GLFWwindow* m_window = nullptr;
+    VGMLogger m_logger;
 };
