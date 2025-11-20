@@ -3,9 +3,14 @@
 #include <GLAD/gl.h>
 #include <GLFW/glfw3.h>
 
+#include <memory>
 #include <unordered_map>
+#include <vector>
 
+#include "gui.h"
 #include "log.h"
+
+#define VGM_VERSION "0.0.1"
 
 class App {
    public:
@@ -20,11 +25,7 @@ class App {
     VGMLogger m_logger;
     GLFWwindow* m_window;
 
-    std::unordered_map<std::string, bool> m_WindowStates = {
-        {"Main Info", true}};
-
-    void initializeImGui();
-    void updateImGui();
+    std::unique_ptr<Gui> m_gui;
 
     bool shouldRun() {
         return !glfwWindowShouldClose(m_window);

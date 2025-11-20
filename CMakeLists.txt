@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(FetchContent)
 
+# GLFW
 FetchContent_Declare(
     glfw
     GIT_REPOSITORY https://github.com/glfw/glfw.git
@@ -13,12 +14,54 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(glfw)
 
+# ImGui
 FetchContent_Declare(
     imgui
     GIT_REPOSITORY https://github.com/ocornut/imgui.git
     GIT_TAG docking
 )
 FetchContent_MakeAvailable(imgui)
+
+# minizip-ng
+FetchContent_Declare(
+    minizip
+    GIT_REPOSITORY https://github.com/zlib-ng/minizip-ng.git
+    GIT_TAG develop
+)
+FetchContent_MakeAvailable(minizip)
+
+# GLAD
+FetchContent_Declare(
+    glad
+    GIT_REPOSITORY https://github.com/Dav1dde/glad.git
+    GIT_TAG        658f48e72aee3c6582e80b05ac0f8787a64fe6bb
+    GIT_PROGRESS   TRUE
+    SOURCE_SUBDIR  cmake
+)
+FetchContent_MakeAvailable(glad)
+glad_add_library(glad_gl_core_46 STATIC REPRODUCIBLE LOADER API gl:core=4.6)
+
+# miniaudio
+FetchContent_Declare(
+    miniaudio
+    GIT_REPOSITORY https://github.com/mackron/miniaudio.git
+    GIT_TAG        master
+)
+FetchContent_MakeAvailable(miniaudio)
+
+FetchContent_Declare(
+    nfd
+    GIT_REPOSITORY https://github.com/btzy/nativefiledialog-extended.git
+    GIT_TAG        master
+)
+FetchContent_MakeAvailable(nfd)
+
+FetchContent_Declare(
+    nlohmann_json
+    GIT_REPOSITORY https://github.com/nlohmann/json.git
+    GIT_TAG develop
+)
+FetchContent_MakeAvailable(nlohmann_json)
 
 set(IMGUI_BACKENDS
     ${imgui_SOURCE_DIR}/backends/imgui_impl_glfw.cpp
@@ -42,17 +85,6 @@ target_include_directories(imgui_lib PUBLIC
 
 target_link_libraries(imgui_lib PUBLIC glfw)
 
-FetchContent_Declare(
-    glad
-    GIT_REPOSITORY https://github.com/Dav1dde/glad.git
-    GIT_TAG        658f48e72aee3c6582e80b05ac0f8787a64fe6bb
-    GIT_PROGRESS   TRUE
-    SOURCE_SUBDIR  cmake
-)
-FetchContent_MakeAvailable(glad)
-
-glad_add_library(glad_gl_core_46 STATIC REPRODUCIBLE LOADER API gl:core=4.6)
-
 file(GLOB SRC_FILES
     "${CMAKE_SOURCE_DIR}/src/*.cpp"
     "${CMAKE_SOURCE_DIR}/src/*.c"
@@ -66,5 +98,9 @@ target_link_libraries(VGMCreator PRIVATE
     glfw
     imgui_lib
     glad_gl_core_46
+    minizip
+    miniaudio
+    nfd
+    nlohmann_json
     opengl32
 )
