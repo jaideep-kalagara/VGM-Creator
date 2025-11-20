@@ -105,7 +105,7 @@ samples/
   https://github.com/Dav1dde/glad
 - miniaudio  
   https://github.com/mackron/miniaudio
-- miniz
+- miniz \
   https://github.com/richgel999/miniz
 - Native File Dialog (NFD)  
   https://github.com/btzy/nativefiledialog-extended
