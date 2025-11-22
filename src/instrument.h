@@ -14,6 +14,7 @@ struct InstrumentInfo {
     std::string name;
     std::string description;
     std::string path;
+    nlohmann::json rawSampleData;
     std::unordered_map<std::string, float> settings;
 };
 
@@ -114,6 +115,7 @@ static bool readInstrument(const std::string& zipPath,
         outInfo->name = json.value("Name", "");
         outInfo->description = json.value("Description", "");
         outInfo->path = zipPath;
+        outInfo->rawSampleData = json["Samples"];
 
         for (auto& item : json["Settings"].items()) {
             outInfo->settings[item.key()] = item.value().get<float>();
